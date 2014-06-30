@@ -1,0 +1,20 @@
+
+// Variables
+@import "../../fox-core/sass/variables.scss";
+
+// Mixins
+@import "../../fox-core/sass/mixins.scss";
+
+// Components
+// --------------------------------------------------
+
+fox-tabs-content{
+    display: none;
+    position: relative;
+    overflow: hidden;
+
+    &.active{
+        display: block;
+    }
+}
+

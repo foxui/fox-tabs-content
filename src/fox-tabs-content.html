@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="css/fox-tabs-content.css"/>
+
+<fox-element name="fox-tabs-content">
+    <script>
+    (function(env){
+
+        var activeClass = 'active';
+
+        function fireEvent(type) {
+            fox.fireEvent(this, type, {
+                detail: this
+            });
+        }
+
+        function activeChanged() {
+            this.active ? this.classList.add(activeClass) :
+            this.classList.remove(activeClass);
+        }
+
+        fox('fox-tabs-content', {
+            active: false,
+
+            lifecycle: {
+                created: function() {
+                    activeChanged.call(this);
+                },
+
+                activeChanged: function() {
+                    activeChanged.call(this);
+                }
+            },
+
+            methods: {
+                show: function() {
+                    fireEvent.call(this, 'beforeshow');
+                    this.active = true;
+                    fireEvent.call(this, 'aftershow');
+                },
+
+                hide: function() {
+                    fireEvent.call(this, 'beforehide');
+                    this.active = false;
+                    fireEvent.call(this, 'afterhide');
+                }
+            },
+
+            accessors: {
+                active: {
+                    attribute: {
+                        boolean: true
+                    }
+                }
+            }
+        });
+    })(this);
+    </script>
+</fox>
